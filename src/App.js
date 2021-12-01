@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import Contact from "./components/contact/Contact";
+import Testimonials from "./components/testimonials/Testimonials";
+import Works from "./components/works/Works";
+import Portfolio from "./components/portfolio/Portfolio";
+import Intro from "./components/intro/Intro";
+import Topbar from "./components/topbar/Topbar";
+import './app.scss'
+import { useState } from "react";
+import Menu from "./components/menu/Menu";
 
 function App() {
+
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  const menuOpenHandler = () => {
+    setMenuOpen(!menuOpen)
+  }
+
+  const menuCloseHandler = () => {
+    setMenuOpen(false);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Topbar menuOpen={menuOpen} setMenuOpen={menuOpenHandler}/>
+      <Menu menuOpen={menuOpen} setMenuOpen={menuOpenHandler}/>
+      <div className="sections">
+        <Intro menuClose={menuCloseHandler}/>
+        <Portfolio menuClose={menuCloseHandler}/>
+        <Works menuClose={menuCloseHandler}/>
+        <Testimonials menuClose={menuCloseHandler}/>
+        <Contact menuClose={menuCloseHandler}/>
+      </div>
     </div>
   );
 }
